@@ -12,7 +12,7 @@ export default function Hero({
 }) {
   return (
     <div
-      className={`flex flex-col gap-4 mx-auto items-center py-10 ${bg} w-full`}
+      className={`flex flex-col gap-4 mx-auto items-center py-10 text-center ${bg} w-full`}
     >
       <h1 className={`${textColor} font-bold text-6xl`}>{header}</h1>
       <h2 className={`${textColor}  text-3xl`}>{subheader}</h2>
