@@ -10,6 +10,7 @@ import cardIPad from "./assets/promo_ipad__fioegapg12qi_large-removebg-preview.p
 import cardIPadPro from "./assets/promo_ipadpro_refresh__evi9utuixwuq_large-removebg-preview.png"
 import m2ChipIcon from "./assets/promo_m2_chip__enw2kz91lsuq_large.png"
 import cardMacStudio from "./assets/promo_mac_studio_announce__do7xnc8z5mgm_large-removebg-preview.png"
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   return (
@@ -84,6 +85,7 @@ export default function App() {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
