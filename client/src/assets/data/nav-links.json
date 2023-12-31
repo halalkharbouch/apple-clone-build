@@ -7,7 +7,7 @@
         "col1": ["Explore iPad", "Explore All iPad", "iPad Pro", "iPad Air", "iPad", "iPad mini"],
         "col2": ["More from iPad", "iPad Spport"]
     },
-    "iPhone": {
+    "iphone": {
         "col1": ["Explore iPhone", "Explore All iPhone", "iPhone 15 Pro", "iPhone 15", "iPhone 14", "iPhone 13", "iPhone SE"],
         "col2": ["More from iPhone", "iPhone Spport"]
     },

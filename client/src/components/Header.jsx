@@ -4,12 +4,12 @@ import "../Header.css";
 import { useState, useRef, useEffect } from "react";
 import navLinks from "../assets/data/nav-links.json";
 
-export default function Header() {
+export default function Header({ hover, setHover }) {
   const [isHovered, setIsHovered] = useState({});
   const [currentHover, setCurrentHover] = useState("");
   const [hoverTarget, setHoverTarget] = useState("");
   const [heights, setHeights] = useState({});
-  const [hover, setHover] = useState(false);
+  
   const divRefs = {
     mac: useRef(null),
     ipad: useRef(null),
@@ -17,10 +17,7 @@ export default function Header() {
     support: useRef(null),
     whereToBuy: useRef(null),
   }
-  console.log(divRefs);
-  console.log(hoverTarget);
-  console.log(heights);
-  console.log(currentHover);
+  
   
   useEffect(() => {
     const newHeights = {};
@@ -45,7 +42,7 @@ export default function Header() {
   return (
     <nav
       onMouseLeave={handleMouseLeave}
-      className={`transition-all duration-500 text-[#dadada] ease-in-out bg-[#444444] fixed top-0 left-0 w-full bg-opacity-95 backdrop-blur-md ${
+      className={`transition-all duration-500 text-[#dadada] ease-in-out bg-[#444444] fixed z-10 top-0 left-0 w-full bg-opacity-95 backdrop-blur-md ${
         hover && "bg-[#161617] bg-opacity-100"
       }`}
     >
@@ -139,7 +136,7 @@ export default function Header() {
             <div className="">
               {currentHover?.col1?.map((link, index) => (
                 <div className="flex flex-col gap-2">
-                  <a href="" className={`text-xl ${index === 0 && "text-xs"}`}>
+                  <a href="" className={`text-xl my-2 ${index === 0 && "text-xs"}`}>
                     {link}
                   </a>
                 </div>
@@ -149,7 +146,7 @@ export default function Header() {
             <div className="">
               {currentHover?.col2?.map((link, index) => (
                 <div className="flex flex-col gap-2">
-                  <a href="" className={`text-xl ${index === 0 && "text-xs"}`}>
+                  <a href="" className={`text-xl my-2 ${index === 0 && "text-xs"}`}>
                     {link}
                   </a>
                 </div>
@@ -159,7 +156,7 @@ export default function Header() {
             <div className="">
               {currentHover?.col3?.map((link, index) => (
                 <div className="flex flex-col gap-2">
-                  <a href="" className={`text-xl ${index === 0 && "text-xs"}`}>
+                  <a href="" className={`text-xl my-2 ${index === 0 && "text-xs"}`}>
                     {link}
                   </a>
                 </div>

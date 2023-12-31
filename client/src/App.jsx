@@ -1,4 +1,4 @@
-import React from "react";
+
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import macBookPro from "./assets/macbook-pro-14-and-16_overview__fz0lron5xyuu_og-removebg-preview.png";
@@ -12,13 +12,17 @@ import m2ChipIcon from "./assets/promo_m2_chip__enw2kz91lsuq_large.png"
 import cardMacStudio from "./assets/promo_mac_studio_announce__do7xnc8z5mgm_large-removebg-preview.png"
 import Footer from "./components/Footer.jsx";
 import NavHover from "./components/NavHover.jsx";
+import { useState } from "react";
 
 export default function App() {
+
+  const [hover, setHover] = useState(false);
+
   return (
     <div className="font-SF">
-      <Header />
+      <Header hover={hover} setHover={setHover}/>
       <NavHover />
-      <div className="">
+      <div className={`mt-10 ${hover && 'blur-md'}`}>
         <div className="flex flex-col gap-4 ">
           <Hero
             textColor={"text-[#1d1d1f]"}
