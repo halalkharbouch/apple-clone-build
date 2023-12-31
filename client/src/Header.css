@@ -1,0 +1,9 @@
+.nav-item {
+    transition: all 0.3s ease;
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  .nav:hover .nav-item {
+    max-height: 500px; /* Adjust the maximum height as needed */
+  }

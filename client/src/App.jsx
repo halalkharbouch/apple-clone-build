@@ -11,11 +11,13 @@ import cardIPadPro from "./assets/promo_ipadpro_refresh__evi9utuixwuq_large-remo
 import m2ChipIcon from "./assets/promo_m2_chip__enw2kz91lsuq_large.png"
 import cardMacStudio from "./assets/promo_mac_studio_announce__do7xnc8z5mgm_large-removebg-preview.png"
 import Footer from "./components/Footer.jsx";
+import NavHover from "./components/NavHover.jsx";
 
 export default function App() {
   return (
     <div className="font-SF">
       <Header />
+      <NavHover />
       <div className="">
         <div className="flex flex-col gap-4 ">
           <Hero

@@ -1,0 +1,22 @@
+{
+    "mac": {
+        "col1": ["Explore Mac", "Explore All Mac", "MacBook Air", "MacBook Pro", "iMac", "Mac mini", "Mac Studio", "Mac Pro", "Displays"],
+        "col2": ["More from Mac", "Mac Spport"]
+    },
+    "ipad": {
+        "col1": ["Explore iPad", "Explore All iPad", "iPad Pro", "iPad Air", "iPad", "iPad mini"],
+        "col2": ["More from iPad", "iPad Spport"]
+    },
+    "iPhone": {
+        "col1": ["Explore iPhone", "Explore All iPhone", "iPhone 15 Pro", "iPhone 15", "iPhone 14", "iPhone 13", "iPhone SE"],
+        "col2": ["More from iPhone", "iPhone Spport"]
+    },
+    "support": {
+        "col1": ["Explore Support", "iPhone", "Mac", "iPad", "Music", "Explore Support"],
+        "col2": ["Get Help", "Community", "Check Coverage", "Contact Us"],
+        "col3": ["Helpful Topics", "Apple ID & Password", "Billing & Subsciptions", "find My"]
+    },
+    "whereToBuy": {
+        "col1": ["Authorized Resellers", "Service & Support", "Explore All Ways to Buy"]
+    }
+}
