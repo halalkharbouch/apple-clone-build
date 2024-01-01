@@ -4,14 +4,13 @@ import "../Header.css";
 import { useState, useRef, useEffect } from "react";
 import navLinks from "../assets/data/nav-links.json";
 import { cn } from "../lib/utils";
-import './Header.css'
+
 
 
 export default function Header({
   hover,
   setHover,
-  headerBg,
-  headerTextColor,
+  headerStyles,
   onHoverHeaderBg,
 }) {
   
@@ -19,6 +18,7 @@ export default function Header({
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
   console.log(height);
+  console.log(currentHover);
 
   useEffect(() => {
     const fetchHeight = async () => {
@@ -32,7 +32,6 @@ export default function Header({
   const handleMouseEnter = (e) => {
     const target = e.target.id;
     setHover(true);
-    
     setCurrentHover(navLinks[target]);
     
   };
@@ -47,9 +46,8 @@ export default function Header({
     <nav
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "transition-all duration-500 ease-in-out fixed z-10 top-0 left-0 w-full bg-opacity-95 backdrop-blur-md",
-        headerBg,
-        headerTextColor,
+        "transition-all duration-500 ease-in-out fixed z-10 top-0 left-0 w-full ",
+        headerStyles,
         hover && `${onHoverHeaderBg || "bg-[#fff]"} bg-opacity-100`
       )}
     >
@@ -104,13 +102,14 @@ export default function Header({
         </div>
 
         <div
-          ref={divRef}
+        id="navMenu"
+          
           className={cn(
             "mx-[20%] max-h-0 overflow-hidden transition-all duration-500 ease-in-out",
             hover && `my-20 max-h-[${height}px]`
           )}
         >
-          <div className="flex gap-16 " >
+          <div className="flex gap-16 " ref={divRef}>
             <div className="">
               {currentHover?.col1?.map((link, index) => (
                 <div className="flex flex-col gap-2">

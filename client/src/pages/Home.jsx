@@ -13,18 +13,19 @@ import cardMacStudio from "../assets/promo_mac_studio_announce__do7xnc8z5mgm_lar
 import Footer from "../components/Footer.jsx";
 import NavHover from "../components/NavHover.jsx";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
 
   const [hover, setHover] = useState(false);
-  
 
   return (
     <div className="font-SF">
-      <Header hover={hover} setHover={setHover} headerBg={'bg-[#444444]'} headerTextColor={'text-[#dadada]'} onHoverHeaderBg={'bg-[#161617]'}/>
+      <Header hover={hover} setHover={setHover} headerStyles={'bg-[#444444] text-[#dadada] bg-opacity-95 backdrop-blur-md'} onHoverHeaderBg={'bg-[#161617]'}/>
       <NavHover />
       <div className={`mt-10 ${hover && 'blur-md'}`}>
         <div className="flex flex-col gap-4 ">
+          <Link to={'/macbook-pro'}>
           <Hero
             textColor={"text-[#1d1d1f]"}
             bg={"bg-[#fafafa]"}
@@ -35,6 +36,8 @@ export default function Home() {
             link={"#"}
             image={macBookPro}
           />
+          </Link>
+          
 
           <Hero
             textColor={"text-[#1d1d1f]"}
