@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import macBookProVideo from "../assets/MacBook Pro - Apple (NG).mp4";
 import { cn } from "../lib/utils";
+import Carousel from "../components/Carousel";
+import { FaArrowRight } from "react-icons/fa";
+import ActiveSlider from "../components/ActiveSlider";
+
 
 export default function MacBookPro() {
   const [hover, setHover] = useState(false);
@@ -37,6 +41,18 @@ export default function MacBookPro() {
         <button className="text-white bg-[#0071e3] px-8 py-2 mx-auto rounded-full mt-6">Find a Store</button>
         <p className="text-[#86868b] text-lg mb-5 font-semibold">Check back later for availability</p>
       </div>
+      </div>
+      <div className="mt-40">
+        <div className="flex flex-row justify-between mx-[17%]">
+          <h1 className="font-bold text-5xl">Get the highlights.</h1>
+          <a href="" className="hover:underline text-[#0071e3]">Watch the event <span><FaArrowRight className="inline-flex"/></span></a>
+        </div>
+      
+
+        <div className="">
+          <ActiveSlider />
+        </div>
+        
       </div>
       
     </div>
