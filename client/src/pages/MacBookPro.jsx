@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import macBookProVideo from "../assets/MacBook Pro - Apple (NG).mp4";
 import { cn } from "../lib/utils";
-import Carousel from "../components/Carousel";
 import { FaArrowRight } from "react-icons/fa";
 import ActiveSlider from "../components/ActiveSlider";
 
@@ -43,7 +42,7 @@ export default function MacBookPro() {
       </div>
       </div>
       <div className="mt-40">
-        <div className="flex flex-row justify-between mx-[17%]">
+        <div className="flex flex-row justify-between mx-[17.5%]">
           <h1 className="font-bold text-5xl">Get the highlights.</h1>
           <a href="" className="hover:underline text-[#0071e3]">Watch the event <span><FaArrowRight className="inline-flex"/></span></a>
         </div>
