@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
@@ -7,8 +7,11 @@ import { FreeMode, Pagination } from "swiper/modules";
 import { RxArrowTopRight } from "react-icons/rx";
 import slideVideo1 from "../assets/media/videos/MacBook Pro - Apple (NG)_2.mp4";
 import slideVideo2 from "../assets/media/videos/MacBook Pro - Apple (NG)_4.mp4";
+import './ActiveSlider.css';
 
 export default function ActiveSlider() {
+  
+
   const [swiper, setSwiper] = useState(null);
   const swiperRef = useRef(null);
 
@@ -72,6 +75,16 @@ export default function ActiveSlider() {
         spaceBetween={100}
         slidesPerView={1.5}
         centeredSlides={true}
+        pagination={{
+          clickable: true,
+          el: ".swiper-custom-pagination",
+          renderBullet: function (index, className) {
+            return `<div class="${className}">
+            <span class="line"></span>
+            </div>`;
+          },
+          
+        }}
       >
         <SwiperSlide>
           <div className="rounded-3xl overflow-hidden">
@@ -105,6 +118,9 @@ export default function ActiveSlider() {
             </figure>
           </div>
         </SwiperSlide>
+
+        <div className="swiper-custom-pagination flex justify-center gap-3 mt-3"></div>
+
       </Swiper>
     </div>
   );
