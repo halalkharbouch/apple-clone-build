@@ -17,8 +17,7 @@ export default function Header({
   const [currentHover, setCurrentHover] = useState("");
   const [height, setHeight] = useState(0);
   const divRef = useRef(null);
-  console.log(height);
-  console.log(currentHover);
+
 
   useEffect(() => {
     const fetchHeight = async () => {

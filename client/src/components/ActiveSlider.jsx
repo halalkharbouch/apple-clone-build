@@ -1,9 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Swiper,
-  SwiperSlide,
-  useSwiperSlide,
-} from "swiper/react";
+import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
@@ -13,48 +9,34 @@ import slideVideo1 from "../assets/media/videos/MacBook Pro - Apple (NG)_2.mp4";
 import slideVideo2 from "../assets/media/videos/MacBook Pro - Apple (NG)_4.mp4";
 
 export default function ActiveSlider() {
-  
   const [swiper, setSwiper] = useState(null);
   const swiperRef = useRef(null);
-  console.log(swiper);
-  console.log(swiperRef);
+
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, {
-        root: null,
-        threshold: 0.5,
-    })
+      rootMargin: "0px",
+      threshold: [0.25, 0.75],
+    });
 
     if (swiperRef.current) {
-        observer.observe(swiperRef.current);
+      observer.observe(swiperRef.current);
     }
 
     return () => {
-        observer.disconnect();
-    }
+      observer.disconnect();
+    };
   }, []);
 
   const handleIntersection = (entries) => {
-        console.log('intersection detected');
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                console.log('swiper is visible');
-                playFirstSlide();
-            } 
-        })
-  }
-
-  function playFirstSlide() {
-    if (swiper && swiper.slides) {
-    console.log('swiper is intialized');
-      const video = swiper.slides[0].querySelector('video');
-      if (video) {
-        video.play();
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        swiperRef.current.swiper.slides[0].querySelector("video").play();
       }
-    }
-  }
+    });
+  };
 
-  
 
   useEffect(() => {
     if (swiper) {
@@ -62,26 +44,24 @@ export default function ActiveSlider() {
     }
   }, [swiper]);
 
-    const handleSlideChange = () => {
-        
-        pauseAllVideos();
-        playCurrentVideo();
+  const handleSlideChange = () => {
+    pauseAllVideos();
+    playCurrentVideo();
+  };
+
+  const pauseAllVideos = () => {
+    const videos = document.querySelectorAll("figure video");
+    videos.forEach((video) => video.pause());
+  };
+
+  const playCurrentVideo = () => {
+    const currentSlide = swiper.slides[swiper.activeIndex];
+    const video = currentSlide.querySelector("video");
+    if (video) {
+      video.play();
     }
+  };
 
-    const pauseAllVideos = () => {
-        const videos = document.querySelectorAll("figure video");
-        videos.forEach((video) => video.pause());
-    };
-
-    const playCurrentVideo = () => {
-        const currentSlide = swiper.slides[swiper.activeIndex];
-        const video = currentSlide.querySelector("video");
-        if (video) {
-            video.play();
-        }
-    };
-
-  
   return (
     <div className="my-10">
       <Swiper
@@ -92,7 +72,6 @@ export default function ActiveSlider() {
         spaceBetween={100}
         slidesPerView={1.5}
         centeredSlides={true}
-        
       >
         <SwiperSlide>
           <div className="rounded-3xl overflow-hidden">
@@ -100,13 +79,7 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video
-                className=""
-                src={slideVideo1}
-                type="video/mp4"
-                muted
-                
-              />
+              <video className="" src={slideVideo1} type="video/mp4" muted />
             </figure>
           </div>
         </SwiperSlide>
@@ -117,12 +90,7 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video
-                src={slideVideo1}
-                type="video/mp4"
-                
-                muted
-              />
+              <video src={slideVideo1} type="video/mp4" muted />
             </figure>
           </div>
         </SwiperSlide>
@@ -133,12 +101,7 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video
-                src={slideVideo1}
-                type="video/mp4"
-                
-                muted
-              />
+              <video src={slideVideo1} type="video/mp4" muted />
             </figure>
           </div>
         </SwiperSlide>
