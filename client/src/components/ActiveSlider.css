@@ -25,10 +25,10 @@
 }
 
 .swiper-custom-pagination .line {
-    opacity: .3;
+    
     height: .4rem;
     width: .4rem;
-    background-color: black;
+    background-color: #707073;
     display: block;
     border-radius: 50%;
     transition: all .3s ease-in-out;
@@ -49,9 +49,10 @@
 }
 
 .swiper-custom-pagination .swiper-pagination-bullet-active .line .progress {
-    background-color: blue;
+    background-color: #29292a;
     height: 100%;
     width: 0;
     border-radius: 4px;
     transition: all .3s ease-in-out;
+    overflow: hidden;
 }
