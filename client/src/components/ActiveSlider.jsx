@@ -14,6 +14,8 @@ export default function ActiveSlider() {
 
   const [swiper, setSwiper] = useState(null);
   const swiperRef = useRef(null);
+  
+  
 
   
 
@@ -48,12 +50,22 @@ export default function ActiveSlider() {
   }, [swiper]);
 
   const handleSlideChange = () => {
+    clearProgress();
     pauseAllVideos();
     playCurrentVideo();
   };
 
+  const clearProgress = () => {
+    const ProgressBars = document.querySelectorAll(".progress");
+    ProgressBars.forEach((progress) => { 
+      if (progress.style.width === "100%") {
+        progress.style.width = "0%";
+      }
+    });
+  }
+
   const pauseAllVideos = () => {
-    const videos = document.querySelectorAll("figure video");
+    const videos = document.querySelectorAll(".slide-video");
     videos.forEach((video) => video.pause());
   };
 
@@ -63,6 +75,14 @@ export default function ActiveSlider() {
     if (video) {
       video.play();
     }
+  };
+
+  const handleTimeUpdate = (e) => {
+    const ProgressBar = document.querySelector(".swiper-pagination-bullet-active .line .progress");
+    const video = e.target;
+    const percent = (video.currentTime / video.duration) * 100;
+    ProgressBar.style.width = `${percent}%`;
+    
   };
 
   return (
@@ -75,12 +95,14 @@ export default function ActiveSlider() {
         spaceBetween={100}
         slidesPerView={1.5}
         centeredSlides={true}
+        
         pagination={{
           clickable: true,
           el: ".swiper-custom-pagination",
           renderBullet: function (index, className) {
             return `<div class="${className}">
-            <span class="line"></span>
+            
+            <div class="line"><div class="progress"></div></div>
             </div>`;
           },
           
@@ -92,7 +114,7 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video className="" src={slideVideo1} type="video/mp4" muted />
+              <video className="slide-video" src={slideVideo1} onTimeUpdate={handleTimeUpdate} type="video/mp4" muted />
             </figure>
           </div>
         </SwiperSlide>
@@ -103,7 +125,7 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video src={slideVideo1} type="video/mp4" muted />
+              <video className="slide-video" src={slideVideo1} onTimeUpdate={handleTimeUpdate} type="video/mp4" muted />
             </figure>
           </div>
         </SwiperSlide>
@@ -114,12 +136,19 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video src={slideVideo1} type="video/mp4" muted />
+              <video className="slide-video" src={slideVideo1} onTimeUpdate={handleTimeUpdate} type="video/mp4" muted />
             </figure>
           </div>
         </SwiperSlide>
 
-        <div className="swiper-custom-pagination flex justify-center gap-3 mt-3"></div>
+       
+        
+        <div className="flex justify-center mt-5 items-center h-20">
+
+          <div className="swiper-custom-pagination px-6 py-6  rounded-full bg-gray-500"></div>
+        </div>
+        
+        
 
       </Swiper>
     </div>
