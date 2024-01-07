@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
@@ -9,20 +9,14 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { VscDebugRestart } from "react-icons/vsc";
 import slideVideo1 from "../assets/media/videos/MacBook Pro - Apple (NG)_2.mp4";
 import slideVideo2 from "../assets/media/videos/MacBook Pro - Apple (NG)_4.mp4";
-import './ActiveSlider.css';
+import "./ActiveSlider.css";
+import { motion } from "framer-motion";
 
 export default function ActiveSlider() {
-  
-
   const [swiper, setSwiper] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [swiperIsEnd, setSwiperIsEnd] = useState(false);
   const swiperRef = useRef(null);
- 
-  
-  
-
-  
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, {
@@ -49,7 +43,6 @@ export default function ActiveSlider() {
     });
   };
 
-
   useEffect(() => {
     if (swiper) {
       swiper.on("slideChange", handleSlideChange);
@@ -65,12 +58,12 @@ export default function ActiveSlider() {
 
   const clearProgress = () => {
     const ProgressBars = document.querySelectorAll(".progress");
-    ProgressBars.forEach((progress) => { 
+    ProgressBars.forEach((progress) => {
       if (progress.style.width === "100%") {
         progress.style.width = "0%";
       }
     });
-  }
+  };
 
   const pauseAllVideos = () => {
     const videos = document.querySelectorAll(".slide-video");
@@ -86,11 +79,12 @@ export default function ActiveSlider() {
   };
 
   const handleTimeUpdate = (e) => {
-    const ProgressBar = document.querySelector(".swiper-pagination-bullet-active .line .progress");
+    const ProgressBar = document.querySelector(
+      ".swiper-pagination-bullet-active .line .progress"
+    );
     const video = e.target;
     const percent = (video.currentTime / video.duration) * 100;
     ProgressBar.style.width = `${percent}%`;
-    
   };
 
   const handlePlay = () => {
@@ -99,15 +93,14 @@ export default function ActiveSlider() {
       swiper.slideTo(0);
       setSwiperIsEnd(false);
       return;
-    }
-    else if (video.paused) {
+    } else if (video.paused) {
       video.play();
       setIsPlaying(true);
     } else {
       video.pause();
       setIsPlaying(false);
     }
-  }
+  };
 
   const handleVideoEnd = () => {
     if (swiper.isEnd) {
@@ -116,8 +109,7 @@ export default function ActiveSlider() {
     } else {
       swiper.slideNext();
     }
-    
-  }
+  };
 
   return (
     <div className="my-10">
@@ -131,7 +123,6 @@ export default function ActiveSlider() {
         centeredSlides={true}
         noSwiping={true}
         noSwipingClass="swiper-no-swiping"
-        
         pagination={{
           clickable: true,
           el: ".swiper-custom-pagination",
@@ -141,7 +132,6 @@ export default function ActiveSlider() {
             <div class="line"><div class="progress"></div></div>
             </div>`;
           },
-          
         }}
       >
         <SwiperSlide onClick={handlePlay}>
@@ -150,7 +140,14 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video className="slide-video" src={slideVideo1} onEnded={handleVideoEnd} onTimeUpdate={handleTimeUpdate} type="video/mp4" muted />
+              <video
+                className="slide-video"
+                src={slideVideo1}
+                onEnded={handleVideoEnd}
+                onTimeUpdate={handleTimeUpdate}
+                type="video/mp4"
+                muted
+              />
             </figure>
           </div>
         </SwiperSlide>
@@ -161,7 +158,14 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video className="slide-video" src={slideVideo1} onEnded={handleVideoEnd}  onTimeUpdate={handleTimeUpdate} type="video/mp4" muted />
+              <video
+                className="slide-video"
+                src={slideVideo1}
+                onEnded={handleVideoEnd}
+                onTimeUpdate={handleTimeUpdate}
+                type="video/mp4"
+                muted
+              />
             </figure>
           </div>
         </SwiperSlide>
@@ -172,21 +176,47 @@ export default function ActiveSlider() {
               <figcaption className="absolute text-3xl font-semibold max-w-[40%] top-7 left-7 text-white m-0 p-0">
                 The world’s best laptop display. Brilliant in every way.
               </figcaption>
-              <video className="slide-video" src={slideVideo1} onEnded={handleVideoEnd} onTimeUpdate={handleTimeUpdate} type="video/mp4" muted />
+              <video
+                className="slide-video"
+                src={slideVideo1}
+                onEnded={handleVideoEnd}
+                onTimeUpdate={handleTimeUpdate}
+                type="video/mp4"
+                muted
+              />
             </figure>
           </div>
         </SwiperSlide>
 
-       
-        
-        <div className="flex gap-10 justify-center mt-5 items-center h-20">
-
+        <motion.div
+          animate={{
+            
+            y: -350,
+            scale: 1,
+            rotate: 0,
+          }}
+          className="flex gap-10 justify-center z-10 relative mt-5 items-center h-20"
+        >
           <div className="swiper-custom-pagination px-6 py-6  rounded-full bg-[#efeff2] hover:bg-[#dcdcdf] cursor-pointer"></div>
-          <button onClick={handlePlay} className="bg-[#efeff2] px-5 py-5 rounded-full hover:bg-[#dcdcdf]">{swiperIsEnd ? <VscDebugRestart /> : isPlaying ? <FaPause /> : <FaPlay />}</button>
-        </div>
-        
-        
-
+          <motion.button
+            animate={{
+              x: [-140, -120, -100, -80, -60, -40, -20, 0],
+              
+              scale: 1,
+              rotate: 0,
+            }}
+            onClick={handlePlay}
+            className="bg-[#efeff2] px-5 py-5 rounded-full hover:bg-[#dcdcdf]"
+          >
+            {swiperIsEnd ? (
+              <VscDebugRestart />
+            ) : isPlaying ? (
+              <FaPause />
+            ) : (
+              <FaPlay />
+            )}
+          </motion.button>
+        </motion.div>
       </Swiper>
     </div>
   );

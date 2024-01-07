@@ -18,6 +18,15 @@ export default {
         },
         animation: {
           slideIn: 'slideIn 0.5s ease-in-out',
+      },
+      transformOrigin: {
+        '0': '0%',
+        '50': '50%',
+        '100': '100%',
+        'left': 'left',
+        'right': 'right',
+        'top': 'top',
+        'bottom': 'bottom',
       }
     },
   },
