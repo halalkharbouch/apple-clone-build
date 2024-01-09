@@ -10,18 +10,19 @@ import { VscDebugRestart } from "react-icons/vsc";
 import slideVideo1 from "../assets/media/videos/MacBook Pro - Apple (NG)_2.mp4";
 import slideVideo2 from "../assets/media/videos/MacBook Pro - Apple (NG)_4.mp4";
 import "./ActiveSlider.css";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 
 export default function ActiveSlider() {
   const [swiper, setSwiper] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [swiperIsEnd, setSwiperIsEnd] = useState(false);
   const swiperRef = useRef(null);
+  const buttonOpenConrols = useAnimationControls()
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, {
       rootMargin: "0px",
-      threshold: [0.25, 0.75],
+      threshold: 0.5,
     });
 
     if (swiperRef.current) {
@@ -41,6 +42,9 @@ export default function ActiveSlider() {
         setIsPlaying(true);
       }
     });
+
+    buttonOpenConrols.start('animate')
+
   };
 
   useEffect(() => {
@@ -197,14 +201,22 @@ export default function ActiveSlider() {
           }}
           className="flex gap-10 justify-center z-10 relative mt-5 items-center h-20"
         >
-          <div className="swiper-custom-pagination px-6 py-6  rounded-full bg-[#efeff2] hover:bg-[#dcdcdf] cursor-pointer"></div>
+          <div className="swiper-custom-pagination px-6 py-6  rounded-full bg-[#efeff2] hover:bg-[#dcdcdf] cursor-pointer hidden"></div>
           <motion.button
-            animate={{
-              x: [-140, -120, -100, -80, -60, -40, -20, 0],
+          variants={{
+            initial: {
+              x: -30,
               
+              scale: 0,
+              
+            },
+            animate: {
               scale: 1,
-              rotate: 0,
-            }}
+              border: "2px solid #0071e3",
+            }
+          }}
+          animate={buttonOpenConrols}
+            initial="initial"
             onClick={handlePlay}
             className="bg-[#efeff2] px-5 py-5 rounded-full hover:bg-[#dcdcdf]"
           >
