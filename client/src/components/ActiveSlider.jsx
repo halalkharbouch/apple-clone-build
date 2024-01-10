@@ -16,8 +16,10 @@ export default function ActiveSlider() {
   const [swiper, setSwiper] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [swiperIsEnd, setSwiperIsEnd] = useState(false);
+  const [Animating, setAnimating] = useState(true);
   const swiperRef = useRef(null);
-  const buttonOpenConrols = useAnimationControls()
+  const buttonOpenConrols = useAnimationControls();
+  const paginationControls = useAnimationControls();
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleIntersection, {
@@ -34,7 +36,15 @@ export default function ActiveSlider() {
     };
   }, []);
 
-  const handleIntersection = (entries) => {
+  const handleIntersection = async (entries) => {
+    await buttonOpenConrols.start("slideUp");
+    await buttonOpenConrols.start("scale");
+    await buttonOpenConrols.start("borderScaleDown");
+    buttonOpenConrols.start("slideRight");
+    paginationControls.start("appear");
+    document.getElementById("play__btn").classList.remove("text-[#efeff2]");
+    
+
     entries.forEach((entry) => {
       if (entry.isIntersecting && swiperRef.current.swiper.activeIndex === 0) {
         pauseAllVideos();
@@ -43,8 +53,7 @@ export default function ActiveSlider() {
       }
     });
 
-    buttonOpenConrols.start('animate')
-
+   
   };
 
   useEffect(() => {
@@ -131,9 +140,14 @@ export default function ActiveSlider() {
           clickable: true,
           el: ".swiper-custom-pagination",
           renderBullet: function (index, className) {
-            return `<div class="${className}">
+
             
+            return `<div class="${className}">
+            <div class="pagination__div">
             <div class="line"><div class="progress"></div></div>
+            </div>
+            
+            
             </div>`;
           },
         }}
@@ -193,40 +207,86 @@ export default function ActiveSlider() {
         </SwiperSlide>
 
         <motion.div
-          animate={{
-            
-            y: -350,
-            scale: 1,
-            rotate: 0,
-          }}
+          // animate={{
+
+          //   y: -350,
+          //   scale: 1,
+          //   rotate: 0,
+          // }}
+          // variants={{
+          //   initial: {
+          //     y: -200,
+          //   },
+          //   animate: {
+          //     y: -350,
+          //   }
+          // }}
           className="flex gap-10 justify-center z-10 relative mt-5 items-center h-20"
         >
-          <div className="swiper-custom-pagination px-6 py-6  rounded-full bg-[#efeff2] hover:bg-[#dcdcdf] cursor-pointer hidden"></div>
-          <motion.button
-          variants={{
-            initial: {
-              x: -30,
-              
-              scale: 0,
-              
-            },
-            animate: {
-              scale: 1,
-              border: "2px solid #0071e3",
-            }
-          }}
-          animate={buttonOpenConrols}
+          <motion.div
+            variants={{
+              initial: {
+                
+                y: -500,
+                scaleX: 0,
+              },
+              appear: {
+                
+                scaleX: 1,
+              }
+            }}
+            transition={{
+              duration: 0.3,
+              ease: "easeInOut",
+            }}
             initial="initial"
+            animate={paginationControls}
+            className="swiper-custom-pagination px-6 py-6 rounded-full bg-[#efeff2] text-[#efeff2] transition-all duration-500 ease-in-out  hover:bg-[#dcdcdf] cursor-pointer "
+          ></motion.div>
+          <motion.button
+            variants={{
+              initial: {
+                x: -150,
+                y: -200,
+                scale: 0,
+              },
+              slideUp: {
+                y: -350,
+              },
+              scale: {
+                border: "12px solid #0071e3",
+                y: -500,
+                scale: 1,
+              },
+              borderScaleDown: {
+                border: ["12px solid #0071e3", "none"],
+              },
+              slideRight: {
+                border: "none",
+                x: 0,
+              },
+            }}
+            initial="initial"
+            transition={{
+              duration: 0.6,
+              ease: "circInOut",
+            }}
+            animate={buttonOpenConrols}
             onClick={handlePlay}
-            className="bg-[#efeff2] px-5 py-5 rounded-full hover:bg-[#dcdcdf]"
+            className="bg-[#efeff2]  px-5 py-5 rounded-full hover:bg-[#dcdcdf]"
           >
-            {swiperIsEnd ? (
-              <VscDebugRestart />
-            ) : isPlaying ? (
-              <FaPause />
-            ) : (
-              <FaPlay />
-            )}
+            <span
+              className="text-[#efeff2] transition-all duration-500 ease-in-out"
+              id="play__btn"
+            >
+              {swiperIsEnd ? (
+                <VscDebugRestart />
+              ) : isPlaying ? (
+                <FaPause />
+              ) : (
+                <FaPlay />
+              )}
+            </span>
           </motion.button>
         </motion.div>
       </Swiper>
